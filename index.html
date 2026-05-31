@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Setoran Tunai</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f3f4f6;
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 12px;
+}
+
+label {
+    font-size: 13px;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-secondary {
+    background: #10b981;
+    color: white;
+}
+
+.btn-camera {
+    background: #111827;
+    color: white;
+}
+
+.info-box {
+    background: #f9fafb;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-top: 10px;
+    white-space: pre-line;
+}
+
+video, img {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.small {
+    font-size: 12px;
+    color: #666;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2><i class="fa-solid fa-cash-register"></i> Setoran Tunai</h2>
+
+    <div class="input-group">
+        <label>TOTAL CASH</label>
+        <input type="number" id="totalCash" placeholder="Rp">
+    </div>
+
+    <div class="input-group">
+        <label>ADMIN</label>
+        <input type="text" id="admin">
+    </div>
+
+    <div class="input-group">
+        <label>PENYETOR</label>
+        <input type="text" id="penyetor">
+    </div>
+
+    <div class="input-group">
+        <label>NAMA KONTER</label>
+        <input type="text" id="konter">
+    </div>
+
+    <div class="input-group">
+        <label>SISA TF</label>
+        <input type="number" id="sisaTf">
+    </div>
+
+    <button class="btn-secondary" onclick="getLocation()">
+        <i class="fa-solid fa-location-dot"></i> AMBIL LOKASI GPS
+    </button>
+
+    <div class="info-box" id="locationBox">Lokasi belum diambil</div>
+
+    <button class="btn-camera" onclick="startCamera()">
+        <i class="fa-solid fa-camera"></i> BUKA KAMERA
+    </button>
+
+    <video id="video" autoplay playsinline style="display:none;"></video>
+
+    <button class="btn" onclick="capture()">
+        <i class="fa-solid fa-circle-dot"></i> CAPTURE BUKTI TF
+    </button>
+
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <img id="resultImage" />
+
+    <button class="btn" onclick="submitData()">
+        KIRIM DATA
+    </button>
+
+    <div class="small" id="output"></div>
+
+</div>
+
+<script>
+let lat = null;
+let lng = null;
+let stream = null;
+
+function getLocation() {
+    if (!navigator.geolocation) {
+        alert("Browser tidak support GPS");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(pos => {
+        lat = pos.coords.latitude;
+        lng = pos.coords.longitude;
+
+        document.getElementById("locationBox").innerText =
+            `Latitude: ${lat}\nLongitude: ${lng}`;
+    }, err => {
+        alert("Gagal ambil lokasi");
+    });
+}
+
+async function startCamera() {
+    const video = document.getElementById("video");
+    video.style.display = "block";
+
+    stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "environment" }
+    });
+
+    video.srcObject = stream;
+}
+
+function capture() {
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+    const img = document.getElementById("resultImage");
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0);
+
+    const dataURL = canvas.toDataURL("image/png");
+    img.src = dataURL;
+
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+    }
+
+    video.style.display = "none";
+}
+
+function submitData() {
+    const data = {
+        totalCash: document.getElementById("totalCash").value,
+        admin: document.getElementById("admin").value,
+        penyetor: document.getElementById("penyetor").value,
+        konter: document.getElementById("konter").value,
+        sisaTf: document.getElementById("sisaTf").value,
+        lokasi: { lat, lng },
+        waktu: new Date().toISOString(),
+        bukti: document.getElementById("resultImage").src
+    };
+
+    console.log(data);
+
+    document.getElementById("output").innerText =
+        "DATA TERKIRIM (cek console)\n\n" + JSON.stringify(data, null, 2);
+
+    alert("Data siap dikirim (demo)");
+}
+</script>
+
+</body>
+</html>
