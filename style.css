@@ -1,0 +1,144 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:15px;
+}
+
+.container{
+    max-width:500px;
+    margin:auto;
+    background:#fff;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.1);
+}
+
+.header{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.header i{
+    font-size:40px;
+    color:#27ae60;
+    margin-bottom:10px;
+}
+
+.header h2{
+    color:#2c3e50;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:600;
+    color:#555;
+}
+
+.input-box{
+    position:relative;
+}
+
+.input-box i{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#777;
+}
+
+.input-box input{
+    width:100%;
+    padding:12px 12px 12px 40px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+}
+
+.hasil{
+    background:#ecfff4;
+    border:2px solid #27ae60;
+    color:#27ae60;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.btn{
+    width:100%;
+    border:none;
+    color:white;
+    padding:13px;
+    border-radius:10px;
+    margin-top:10px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.gps{
+    background:#3498db;
+}
+
+.wa{
+    background:#25D366;
+}
+
+.reset{
+    background:#e74c3c;
+}
+
+.lokasi{
+    margin-top:10px;
+    background:#eef7ff;
+    padding:10px;
+    border-radius:10px;
+    font-size:14px;
+}
+
+.camera{
+    background:#34495e;
+}
+
+.capture{
+    background:#27ae60;
+}
+
+#video{
+    width:100%;
+    margin-top:10px;
+    border-radius:10px;
+    display:none;
+    background:#000;
+}
+
+.preview{
+    width:100%;
+    margin-top:10px;
+    border-radius:10px;
+    display:none;
+}
+
+input[type=file]{
+    width:100%;
+    border:1px solid #ddd;
+    padding:10px;
+    border-radius:10px;
+}
+
+@media(max-width:600px){
+    .container{
+        padding:15px;
+    }
+}
