@@ -134,26 +134,32 @@ async function shareWA(){
     let sisa =
     document.getElementById("sisaTF").innerText;
 
-    let pesan =
-`SETORAN TUNAI
+let pesan =
+`🧾 *SETORAN TUNAI*
 
-TOTAL CASH
+━━━━━━━━━━━━━━━
+
+💰 *Total Cash*
 Rp ${Number(cash).toLocaleString('id-ID')}
 
-ADMIN
+➖ *Admin*
 Rp ${Number(admin).toLocaleString('id-ID')}
 
-PENYETOR
+👤 *Penyetor*
 Rp ${Number(penyetor).toLocaleString('id-ID')}
 
-SISA TF
+✅ *Sisa TF*
 ${sisa}
 
-NAMA PENYETOR
+━━━━━━━━━━━━━━━
+
+🙍 *Nama Penyetor*
 ${namaPenyetor}
 
-NAMA KONTER
-${namaKonter}`;
+🏪 *Nama Konter*
+${namaKonter}
+
+📸 Bukti transfer terlampir`;
 
     try{
 
