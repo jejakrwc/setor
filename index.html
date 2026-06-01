@@ -65,35 +65,34 @@
     </div>
 
     
-<div class="form-group">
-    <label>Bukti Transfer (Wajib Foto Langsung)</label>
+<div class="button-group">
 
-    <button type="button" class="btn camera" onclick="startCamera()">
+    <button type="button" class="btn camera"
+        onclick="startCamera()">
         <i class="fas fa-camera"></i>
-        Buka Kamera
+        Kamera
     </button>
 
-    <video id="video" autoplay playsinline></video>
-
-    <button type="button" class="btn capture" onclick="capturePhoto()">
-        <i class="fas fa-camera-retro"></i>
-        Ambil Foto
+    <button type="button" class="btn capture"
+        onclick="capturePhoto()">
+        <i class="fas fa-image"></i>
+        Gambar
     </button>
 
-    <canvas id="canvas" style="display:none;"></canvas>
-
-    <img id="preview" class="preview">
-</div>
-
-    <button class="btn wa" onclick="shareWA()">
+    <button type="button" class="btn wa"
+        onclick="shareWA()">
         <i class="fab fa-whatsapp"></i>
-        Share WhatsApp
+        Share
     </button>
 
-    <button class="btn reset" onclick="resetForm()">
+    <button type="button" class="btn reset"
+        onclick="resetForm()">
         <i class="fas fa-rotate-left"></i>
         Reset
     </button>
+
+</div>
+</div>
 
 </div>
 
