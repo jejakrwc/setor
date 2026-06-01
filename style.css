@@ -85,18 +85,20 @@ label{
     background:#ecfdf5;
     border:1px solid #bbf7d0;
 }
-#preview{
-    width:100%;
-    display:block;
-    object-fit:contain;
-    border-radius:12px;
-}
-
 #video{
     width:100%;
-    display:block;
-    object-fit:cover;
+    display:none;
+}
+
+#preview{
+    width:100%;
+    display:none;
     border-radius:12px;
+    margin-top:10px;
+}
+
+.preview{
+    width:100%;
 }
 .hasil small{
     display:block;
