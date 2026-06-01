@@ -138,16 +138,13 @@ let pesan =
 `🧾 *SETORAN TUNAI*
 
 \`\`\`
-========================
-TOTAL CASH : Rp ${Number(cash).toLocaleString('id-ID')}
-ADMIN      : Rp ${Number(admin).toLocaleString('id-ID')}
-PENYETOR   : Rp ${Number(penyetor).toLocaleString('id-ID')}
-------------------------
-SISA TF    : ${sisa}
-========================
+TOTAL CASH  : Rp ${Number(cash).toLocaleString('id-ID')}
+ADMIN       : Rp ${Number(admin).toLocaleString('id-ID')}
+PENYETOR    : Rp ${Number(penyetor).toLocaleString('id-ID')}
+SISA TF     : ${sisa}
 
-NAMA       : ${namaPenyetor}
-KONTER     : ${namaKonter}
+NAMA        : ${namaPenyetor}
+KONTER      : ${namaKonter}
 \`\`\`
 
 📸 Bukti transfer terlampir`;
