@@ -50,11 +50,16 @@ async function startCamera() {
         );
     }
 }
-function capturePhoto() {
+async function capturePhoto() {
 
-    const video = document.getElementById("video");
-    const canvas = document.getElementById("canvas");
-    const preview = document.getElementById("preview");
+    const video =
+    document.getElementById("video");
+
+    const canvas =
+    document.getElementById("canvas");
+
+    const preview =
+    document.getElementById("preview");
 
     if (!video.srcObject) {
 
@@ -63,10 +68,24 @@ function capturePhoto() {
         return;
     }
 
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+    if (
+        video.videoWidth === 0 ||
+        video.videoHeight === 0
+    ) {
 
-    const ctx = canvas.getContext("2d");
+        alert("Tunggu kamera siap");
+
+        return;
+    }
+
+    canvas.width =
+    video.videoWidth;
+
+    canvas.height =
+    video.videoHeight;
+
+    const ctx =
+    canvas.getContext("2d");
 
     ctx.drawImage(
         video,
@@ -77,23 +96,30 @@ function capturePhoto() {
     );
 
     photoData =
-    canvas.toDataURL("image/jpeg", 0.9);
+    canvas.toDataURL(
+        "image/jpeg",
+        0.9
+    );
 
-    canvas.toBlob(function(blob){
+    const blob =
+    await new Promise(resolve =>
+        canvas.toBlob(
+            resolve,
+            "image/jpeg",
+            0.9
+        )
+    );
 
-        photoFile =
-        new File(
-            [blob],
-            "bukti-transfer.jpg",
-            {
-                type:"image/jpeg"
-            }
-        );
+    photoFile =
+    new File(
+        [blob],
+        "bukti-transfer.jpg",
+        {
+            type:"image/jpeg"
+        }
+    );
 
-    }, "image/jpeg", 0.9);
-
-    preview.src = photoData;
-    preview.style.display = "block";
+    /* MATIKAN KAMERA DULU */
 
     if (stream) {
 
@@ -103,7 +129,24 @@ function capturePhoto() {
         stream = null;
     }
 
+    video.pause();
+    video.srcObject = null;
+
+    /* SEMBUNYIKAN VIDEO */
+
     video.style.display = "none";
+
+    /* TAMPILKAN PREVIEW */
+
+    preview.src = photoData;
+    preview.style.display = "block";
+
+    preview.style.width = "100%";
+
+    preview.scrollIntoView({
+        behavior:"smooth"
+    });
+
 }
 async function shareWA(){
 
