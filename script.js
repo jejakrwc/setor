@@ -1,6 +1,5 @@
 let photoData = "";
 let stream = null;
-let lokasiMaps = "";
 
 function hitungSisaTF(){
 
@@ -18,57 +17,7 @@ document.querySelectorAll("#cash,#admin,#penyetor")
 .forEach(el=>{
     el.addEventListener("input", hitungSisaTF);
 });
-async function ambilGPS() {
 
-    if (!navigator.geolocation) {
-
-        alert("GPS tidak didukung browser.");
-
-        return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-
-        function(pos) {
-
-            const lat = pos.coords.latitude;
-            const lng = pos.coords.longitude;
-
-            lokasiMaps =
-            `https://maps.google.com/?q=${lat},${lng}`;
-
-            const lokasi =
-            document.getElementById("lokasi");
-
-            if(lokasi){
-
-                lokasi.innerHTML =
-                `📍 ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-
-            }
-
-            alert("Lokasi berhasil diambil");
-
-        },
-
-        function(err) {
-
-            console.error(err);
-
-            alert(
-                "Gagal mengambil lokasi. Pastikan GPS aktif dan izin lokasi diberikan."
-            );
-
-        },
-
-        {
-            enableHighAccuracy: true,
-            timeout: 15000,
-            maximumAge: 0
-        }
-
-    );
-}
 async function startCamera() {
 
     try {
@@ -150,12 +99,7 @@ function shareWA(){
 
         return;
     }
-if (lokasiMaps === "") {
 
-    alert("Silakan ambil lokasi GPS terlebih dahulu!");
-
-    return;
-}
 
     let cash =
     document.getElementById("cash").value || 0;
@@ -175,29 +119,26 @@ if (lokasiMaps === "") {
     let sisa =
     document.getElementById("sisaTF").innerText;
 
-let pesan =
-`SETORAN TUNAI
+    let pesan =
+`*SETORAN TUNAI*
 
-TOTAL CASH
+💰 TOTAL CASH
 Rp ${Number(cash).toLocaleString('id-ID')}
 
-ADMIN
+➖ ADMIN
 Rp ${Number(admin).toLocaleString('id-ID')}
 
-PENYETOR
+➖ PENYETOR
 Rp ${Number(penyetor).toLocaleString('id-ID')}
 
-SISA TF
+✅ SISA TF
 ${sisa}
 
-NAMA PENYETOR
+👤 NAMA PENYETOR
 ${namaPenyetor}
 
-NAMA KONTER
+🏪 NAMA KONTER
 ${namaKonter}
-
-LOKASI GPS
-${lokasiMaps}
 
 
 📷 Bukti transfer sudah difoto.`;
@@ -228,17 +169,7 @@ function resetForm(){
     document.getElementById("preview").style.display = "none";
 
     document.getElementById("video").style.display = "none";
-lokasiMaps = "";
 
-const lokasi =
-document.getElementById("lokasi");
-
-if(lokasi){
-
-    lokasi.innerHTML =
-    "Lokasi belum diambil";
-
-}
     if(stream){
         stream.getTracks()
         .forEach(track=>track.stop());
