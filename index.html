@@ -64,7 +64,32 @@
         </div>
     </div>
 
-    
+    <div class="media-card">
+
+    <div class="media-title">
+        <i class="fas fa-camera"></i>
+        Preview Bukti Transfer
+    </div>
+
+    <video
+        id="video"
+        autoplay
+        playsinline
+        muted
+        style="display:none;">
+    </video>
+
+    <canvas
+        id="canvas"
+        style="display:none;">
+    </canvas>
+
+    <img
+        id="preview"
+        class="preview"
+        alt="Preview Foto"
+        style="display:none;">
+</div>
 <div class="button-group">
 
 <button type="button" class="btn camera" onclick="startCamera()">
@@ -94,18 +119,6 @@
 </div>
 
 </div>
-<video
-    id="video"
-    autoplay
-    playsinline
-    muted
-    style="display:none;width:100%;border-radius:14px;">
-</video>
-
-<canvas
-    id="canvas"
-    style="display:none;">
-</canvas>
 
 
 <script src="script.js"></script>
