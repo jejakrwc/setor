@@ -101,13 +101,6 @@ function shareWA(){
         return;
     }
 
-    if(lokasiMaps === ""){
-
-        alert(
-        "Silakan ambil lokasi GPS terlebih dahulu!"
-        );
-
-        return;
     }
 
     let cash =
