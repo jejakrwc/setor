@@ -67,11 +67,10 @@
     
 <div class="button-group">
 
-    <button type="button" class="btn camera"
-        onclick="startCamera()">
-        <i class="fas fa-camera"></i>
-        Kamera
-    </button>
+<button type="button" class="btn camera" onclick="startCamera()">
+    <i class="fas fa-camera"></i>
+    Kamera
+</button>
 
     <button type="button" class="btn capture"
         onclick="capturePhoto()">
@@ -95,7 +94,27 @@
 </div>
 
 </div>
+<video
+    id="video"
+    autoplay
+    playsinline
+    muted
+    style="display:none;width:100%;border-radius:14px;">
+</video>
 
+<canvas
+    id="canvas"
+    style="display:none;">
+</canvas>
+
+<img
+    id="preview"
+    class="preview"
+    style="display:none;width:100%;">
+    
+<div id="lokasi">
+    Lokasi belum diambil
+</div>
 <script src="script.js"></script>
 
 </body>
