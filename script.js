@@ -1,5 +1,6 @@
 let photoData = "";
 let stream = null;
+let lokasiMaps = "";
 
 function hitungSisaTF(){
 
@@ -17,7 +18,57 @@ document.querySelectorAll("#cash,#admin,#penyetor")
 .forEach(el=>{
     el.addEventListener("input", hitungSisaTF);
 });
+async function ambilGPS() {
 
+    if (!navigator.geolocation) {
+
+        alert("GPS tidak didukung browser.");
+
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(pos) {
+
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+
+            lokasiMaps =
+            `https://maps.google.com/?q=${lat},${lng}`;
+
+            const lokasi =
+            document.getElementById("lokasi");
+
+            if(lokasi){
+
+                lokasi.innerHTML =
+                `📍 ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+
+            }
+
+            alert("Lokasi berhasil diambil");
+
+        },
+
+        function(err) {
+
+            console.error(err);
+
+            alert(
+                "Gagal mengambil lokasi. Pastikan GPS aktif dan izin lokasi diberikan."
+            );
+
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 0
+        }
+
+    );
+}
 async function startCamera() {
 
     try {
@@ -89,12 +140,22 @@ function capturePhoto() {
 
     video.style.display = "none";
 }
-async function shareWA() {
+function shareWA(){
 
-    if (!photoData) {
-        alert("Silakan foto bukti transfer terlebih dahulu!");
+    if(photoData === ""){
+
+        alert(
+        "Silakan foto bukti transfer terlebih dahulu!"
+        );
+
         return;
     }
+if (lokasiMaps === "") {
+
+    alert("Silakan ambil lokasi GPS terlebih dahulu!");
+
+    return;
+}
 
     let cash =
     document.getElementById("cash").value || 0;
@@ -114,7 +175,7 @@ async function shareWA() {
     let sisa =
     document.getElementById("sisaTF").innerText;
 
-    let pesan =
+let pesan =
 `SETORAN TUNAI
 
 TOTAL CASH
@@ -133,48 +194,55 @@ NAMA PENYETOR
 ${namaPenyetor}
 
 NAMA KONTER
-${namaKonter}`;
+${namaKonter}
 
-    try {
+LOKASI GPS
+${lokasiMaps}
 
-        const response =
-        await fetch(photoData);
 
-        const blob =
-        await response.blob();
+📷 Bukti transfer sudah difoto.`;
 
-        const file =
-        new File(
-            [blob],
-            "bukti-setoran.jpg",
-            { type: "image/jpeg" }
-        );
+    window.open(
+        "https://wa.me/?text=" +
+        encodeURIComponent(pesan),
+        "_blank"
+    );
+}
 
-        if (
-            navigator.canShare &&
-            navigator.canShare({ files:[file] })
-        ) {
+function resetForm(){
 
-            await navigator.share({
-                title: "Setoran Tunai",
-                text: pesan,
-                files: [file]
-            });
+    document.querySelectorAll("input")
+    .forEach(input=>{
 
-        } else {
-
-            window.open(
-                "https://wa.me/?text=" +
-                encodeURIComponent(pesan),
-                "_blank"
-            );
-
+        if(input.type !== "button"){
+            input.value = "";
         }
 
-    } catch(err) {
+    });
 
-        console.error(err);
+    document.getElementById("sisaTF").innerHTML =
+    "Rp 0";
 
-        alert("Gagal membagikan foto.");
+
+    document.getElementById("preview").src = "";
+    document.getElementById("preview").style.display = "none";
+
+    document.getElementById("video").style.display = "none";
+lokasiMaps = "";
+
+const lokasi =
+document.getElementById("lokasi");
+
+if(lokasi){
+
+    lokasi.innerHTML =
+    "Lokasi belum diambil";
+
+}
+    if(stream){
+        stream.getTracks()
+        .forEach(track=>track.stop());
     }
+
+    photoData = "";
 }
