@@ -19,36 +19,48 @@ document.querySelectorAll("#cash,#admin,#penyetor")
     el.addEventListener("input", hitungSisaTF);
 });
 
+async function startCamera() {
 
-async function startCamera(){
-
-    try{
-
-        stream = await navigator.mediaDevices.getUserMedia({
-            video:{
-                facingMode:{
-                    ideal:"environment"
-                }
-            }
-        });
+    try {
 
         const video =
         document.getElementById("video");
 
+        stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                facingMode: {
+                    ideal: "environment"
+                }
+            },
+            audio: false
+        });
+
         video.srcObject = stream;
+
+        await video.play();
+
         video.style.display = "block";
 
-    }catch(err){
+    } catch (err) {
 
-        alert("Kamera tidak dapat dibuka");
+        console.error(err);
 
+        alert(
+            "Kamera tidak dapat dibuka. Pastikan izin kamera sudah diberikan."
+        );
     }
 }
-
-function capturePhoto(){
+function capturePhoto() {
 
     const video =
     document.getElementById("video");
+
+    if (!video.srcObject) {
+
+        alert("Silakan buka kamera terlebih dahulu");
+
+        return;
+    }
 
     const canvas =
     document.getElementById("canvas");
@@ -71,21 +83,21 @@ function capturePhoto(){
     );
 
     photoData =
-    canvas.toDataURL("image/jpeg",0.9);
+    canvas.toDataURL("image/jpeg", 0.9);
 
     preview.src = photoData;
     preview.style.display = "block";
 
-    if(stream){
+    if (stream) {
 
         stream.getTracks()
-        .forEach(track=>track.stop());
+        .forEach(track => track.stop());
 
+        stream = null;
     }
 
     video.style.display = "none";
 }
-
 function shareWA(){
 
     if(photoData === ""){
