@@ -1,4 +1,3 @@
-let lokasiMaps = "";
 let photoData = "";
 let stream = null;
 
@@ -101,7 +100,6 @@ function shareWA(){
         return;
     }
 
-    }
 
     let cash =
     document.getElementById("cash").value || 0;
@@ -142,8 +140,6 @@ ${namaPenyetor}
 🏪 NAMA KONTER
 ${namaKonter}
 
-📍 LOKASI
-${lokasiMaps}
 
 📷 Bukti transfer sudah difoto.`;
 
@@ -168,8 +164,6 @@ function resetForm(){
     document.getElementById("sisaTF").innerHTML =
     "Rp 0";
 
-    document.getElementById("lokasi").innerHTML =
-    "Lokasi belum diambil";
 
     document.getElementById("preview").src = "";
     document.getElementById("preview").style.display = "none";
@@ -181,6 +175,5 @@ function resetForm(){
         .forEach(track=>track.stop());
     }
 
-    lokasiMaps = "";
     photoData = "";
 }
