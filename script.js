@@ -1,4 +1,5 @@
 let photoData = "";
+let photoFile = null;
 let stream = null;
 
 function hitungSisaTF(){
@@ -56,7 +57,9 @@ function capturePhoto() {
     const preview = document.getElementById("preview");
 
     if (!video.srcObject) {
+
         alert("Buka kamera terlebih dahulu");
+
         return;
     }
 
@@ -73,25 +76,38 @@ function capturePhoto() {
         canvas.height
     );
 
-    photoData = canvas.toDataURL("image/jpeg", 0.9);
+    photoData =
+    canvas.toDataURL("image/jpeg", 0.9);
+
+    canvas.toBlob(function(blob){
+
+        photoFile =
+        new File(
+            [blob],
+            "bukti-transfer.jpg",
+            {
+                type:"image/jpeg"
+            }
+        );
+
+    }, "image/jpeg", 0.9);
 
     preview.src = photoData;
     preview.style.display = "block";
 
-    preview.scrollIntoView({
-        behavior: "smooth"
-    });
-
     if (stream) {
-        stream.getTracks().forEach(track => track.stop());
+
+        stream.getTracks()
+        .forEach(track => track.stop());
+
         stream = null;
     }
 
     video.style.display = "none";
 }
-function shareWA(){
+async function shareWA(){
 
-    if(photoData === ""){
+    if(!photoFile){
 
         alert(
         "Silakan foto bukti transfer terlebih dahulu!"
@@ -99,7 +115,6 @@ function shareWA(){
 
         return;
     }
-
 
     let cash =
     document.getElementById("cash").value || 0;
@@ -120,34 +135,57 @@ function shareWA(){
     document.getElementById("sisaTF").innerText;
 
     let pesan =
-`*SETORAN TUNAI*
+`SETORAN TUNAI
 
-💰 TOTAL CASH
+TOTAL CASH
 Rp ${Number(cash).toLocaleString('id-ID')}
 
-➖ ADMIN
+ADMIN
 Rp ${Number(admin).toLocaleString('id-ID')}
 
-➖ PENYETOR
+PENYETOR
 Rp ${Number(penyetor).toLocaleString('id-ID')}
 
-✅ SISA TF
+SISA TF
 ${sisa}
 
-👤 NAMA PENYETOR
+NAMA PENYETOR
 ${namaPenyetor}
 
-🏪 NAMA KONTER
-${namaKonter}
+NAMA KONTER
+${namaKonter}`;
 
+    try{
 
-📷 Bukti transfer sudah difoto.`;
+        if(
+            navigator.canShare &&
+            navigator.canShare({
+                files:[photoFile]
+            })
+        ){
 
-    window.open(
-        "https://wa.me/?text=" +
-        encodeURIComponent(pesan),
-        "_blank"
-    );
+            await navigator.share({
+                title:"Setoran Tunai",
+                text:pesan,
+                files:[photoFile]
+            });
+
+        }else{
+
+            window.open(
+                "https://wa.me/?text=" +
+                encodeURIComponent(pesan),
+                "_blank"
+            );
+
+        }
+
+    }catch(err){
+
+        console.error(err);
+
+        alert("Gagal membagikan data.");
+    }
 }
 
 function resetForm(){
@@ -176,4 +214,5 @@ function resetForm(){
     }
 
     photoData = "";
+photoFile = null;
 }
