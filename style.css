@@ -1,144 +1,102 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI,sans-serif;
-}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setoran Tunai</title>
 
-body{
-    background:#f4f6f9;
-    padding:15px;
-}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-.container{
-    max-width:500px;
-    margin:auto;
-    background:#fff;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 3px 12px rgba(0,0,0,.1);
-}
+<div class="container">
 
-.header{
-    text-align:center;
-    margin-bottom:20px;
-}
+    <div class="header">
+        <i class="fas fa-money-bill-wave"></i>
+        <h2>SETORAN TUNAI</h2>
+    </div>
 
-.header i{
-    font-size:40px;
-    color:#27ae60;
-    margin-bottom:10px;
-}
+    <div class="form-group">
+        <label>Total Uang Cash</label>
+        <div class="input-box">
+            <i class="fas fa-wallet"></i>
+            <input type="number" id="cash" placeholder="Masukkan total uang cash">
+        </div>
+    </div>
 
-.header h2{
-    color:#2c3e50;
-}
+    <div class="form-group">
+        <label>Admin</label>
+        <div class="input-box">
+            <i class="fas fa-minus-circle"></i>
+            <input type="number" id="admin" value="0">
+        </div>
+    </div>
 
-.form-group{
-    margin-bottom:15px;
-}
+    <div class="form-group">
+        <label>Penyetor</label>
+        <div class="input-box">
+            <i class="fas fa-user-minus"></i>
+            <input type="number" id="penyetor" value="0">
+        </div>
+    </div>
 
-label{
-    display:block;
-    margin-bottom:6px;
-    font-weight:600;
-    color:#555;
-}
+    <div class="form-group">
+        <label>Sisa TF</label>
+        <div class="hasil" id="sisaTF">
+            Rp 0
+        </div>
+    </div>
 
-.input-box{
-    position:relative;
-}
+    <div class="form-group">
+        <label>Nama Penyetor</label>
+        <div class="input-box">
+            <i class="fas fa-user"></i>
+            <input type="text" id="namaPenyetor">
+        </div>
+    </div>
 
-.input-box i{
-    position:absolute;
-    left:12px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#777;
-}
+    <div class="form-group">
+        <label>Nama Konter</label>
+        <div class="input-box">
+            <i class="fas fa-store"></i>
+            <input type="text" id="namaKonter">
+        </div>
+    </div>
 
-.input-box input{
-    width:100%;
-    padding:12px 12px 12px 40px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-size:15px;
-}
+    
+<div class="button-group">
 
-.hasil{
-    background:#ecfff4;
-    border:2px solid #27ae60;
-    color:#27ae60;
-    padding:15px;
-    border-radius:10px;
-    text-align:center;
-    font-size:24px;
-    font-weight:bold;
-}
+    <button type="button" class="btn camera"
+        onclick="startCamera()">
+        <i class="fas fa-camera"></i>
+        Kamera
+    </button>
 
-.btn{
-    width:100%;
-    border:none;
-    color:white;
-    padding:13px;
-    border-radius:10px;
-    margin-top:10px;
-    cursor:pointer;
-    font-size:15px;
-}
+    <button type="button" class="btn capture"
+        onclick="capturePhoto()">
+        <i class="fas fa-image"></i>
+        Gambar
+    </button>
 
-.gps{
-    background:#3498db;
-}
+    <button type="button" class="btn wa"
+        onclick="shareWA()">
+        <i class="fab fa-whatsapp"></i>
+        Share
+    </button>
 
-.wa{
-    background:#25D366;
-}
+    <button type="button" class="btn reset"
+        onclick="resetForm()">
+        <i class="fas fa-rotate-left"></i>
+        Reset
+    </button>
 
-.reset{
-    background:#e74c3c;
-}
+</div>
+</div>
 
-.lokasi{
-    margin-top:10px;
-    background:#eef7ff;
-    padding:10px;
-    border-radius:10px;
-    font-size:14px;
-}
+</div>
 
-.camera{
-    background:#34495e;
-}
+<script src="script.js"></script>
 
-.capture{
-    background:#27ae60;
-}
-
-#video{
-    width:100%;
-    margin-top:10px;
-    border-radius:10px;
-    display:none;
-    background:#000;
-}
-
-.preview{
-    width:100%;
-    margin-top:10px;
-    border-radius:10px;
-    display:none;
-}
-
-input[type=file]{
-    width:100%;
-    border:1px solid #ddd;
-    padding:10px;
-    border-radius:10px;
-}
-
-@media(max-width:600px){
-    .container{
-        padding:15px;
-    }
-}
+</body>
+</html>
