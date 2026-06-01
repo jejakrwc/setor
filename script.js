@@ -89,17 +89,12 @@ function capturePhoto() {
 
     video.style.display = "none";
 }
-function shareWA(){
+async function shareWA() {
 
-    if(photoData === ""){
-
-        alert(
-        "Silakan foto bukti transfer terlebih dahulu!"
-        );
-
+    if (!photoData) {
+        alert("Silakan foto bukti transfer terlebih dahulu!");
         return;
     }
-
 
     let cash =
     document.getElementById("cash").value || 0;
@@ -120,60 +115,66 @@ function shareWA(){
     document.getElementById("sisaTF").innerText;
 
     let pesan =
-`*SETORAN TUNAI*
+`SETORAN TUNAI
 
-💰 TOTAL CASH
+TOTAL CASH
 Rp ${Number(cash).toLocaleString('id-ID')}
 
-➖ ADMIN
+ADMIN
 Rp ${Number(admin).toLocaleString('id-ID')}
 
-➖ PENYETOR
+PENYETOR
 Rp ${Number(penyetor).toLocaleString('id-ID')}
 
-✅ SISA TF
+SISA TF
 ${sisa}
 
-👤 NAMA PENYETOR
+NAMA PENYETOR
 ${namaPenyetor}
 
-🏪 NAMA KONTER
-${namaKonter}
+NAMA KONTER
+${namaKonter}`;
 
+    try {
 
-📷 Bukti transfer sudah difoto.`;
+        const response =
+        await fetch(photoData);
 
-    window.open(
-        "https://wa.me/?text=" +
-        encodeURIComponent(pesan),
-        "_blank"
-    );
-}
+        const blob =
+        await response.blob();
 
-function resetForm(){
+        const file =
+        new File(
+            [blob],
+            "bukti-setoran.jpg",
+            { type: "image/jpeg" }
+        );
 
-    document.querySelectorAll("input")
-    .forEach(input=>{
+        if (
+            navigator.canShare &&
+            navigator.canShare({ files:[file] })
+        ) {
 
-        if(input.type !== "button"){
-            input.value = "";
+            await navigator.share({
+                title: "Setoran Tunai",
+                text: pesan,
+                files: [file]
+            });
+
+        } else {
+
+            window.open(
+                "https://wa.me/?text=" +
+                encodeURIComponent(pesan),
+                "_blank"
+            );
+
         }
 
-    });
+    } catch(err) {
 
-    document.getElementById("sisaTF").innerHTML =
-    "Rp 0";
+        console.error(err);
 
-
-    document.getElementById("preview").src = "";
-    document.getElementById("preview").style.display = "none";
-
-    document.getElementById("video").style.display = "none";
-
-    if(stream){
-        stream.getTracks()
-        .forEach(track=>track.stop());
+        alert("Gagal membagikan foto.");
     }
-
-    photoData = "";
 }
