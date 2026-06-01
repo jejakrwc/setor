@@ -1,52 +1,60 @@
-/* ===== MOBILE FIRST ===== */
+/* ===== RESET ===== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
 body{
-    margin:0;
-    background:#f5f7fb;
+    background:#f1f5f9;
     font-family:'Poppins',sans-serif;
-    padding:10px;
+    padding:12px;
+    color:#1e293b;
 }
+
+/* ===== CONTAINER ===== */
 
 .container{
-    max-width:500px;
+    max-width:520px;
     margin:auto;
     background:#fff;
-    border-radius:18px;
-    padding:15px;
-    box-shadow:0 3px 15px rgba(0,0,0,.08);
+    border-radius:24px;
+    padding:18px;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.08);
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 
 .header{
     text-align:center;
-    margin-bottom:15px;
+    margin-bottom:18px;
 }
 
 .header i{
-    font-size:32px;
+    font-size:38px;
     color:#16a34a;
     margin-bottom:8px;
 }
 
 .header h2{
-    font-size:18px;
-    color:#1e293b;
-    margin:0;
+    font-size:20px;
+    font-weight:700;
 }
 
-/* FORM */
+/* ===== FORM ===== */
 
 .form-group{
-    margin-bottom:12px;
+    margin-bottom:14px;
 }
 
 label{
     display:block;
+    margin-bottom:6px;
     font-size:13px;
     font-weight:600;
-    margin-bottom:5px;
-    color:#334155;
+    color:#475569;
 }
 
 .input-box{
@@ -59,103 +67,117 @@ label{
     top:50%;
     transform:translateY(-50%);
     color:#94a3b8;
+    font-size:15px;
 }
 
 .input-box input{
     width:100%;
-    height:48px;
+    height:50px;
     border:1px solid #dbe2ea;
-    border-radius:12px;
+    border-radius:14px;
     padding-left:42px;
-    font-size:14px;
-    outline:none;
+    font-size:15px;
+    background:#fff;
+    transition:.2s;
 }
 
 .input-box input:focus{
-    border-color:#3b82f6;
+    border-color:#22c55e;
+    box-shadow:
+        0 0 0 4px rgba(34,197,94,.12);
+    outline:none;
 }
 
-/* HASIL */
+/* ===== HASIL ===== */
 
 .hasil{
-    margin:15px 0;
-    padding:15px;
-    border-radius:14px;
-    text-align:center;
-    background:#ecfdf5;
+    background:#f0fdf4;
     border:1px solid #bbf7d0;
-}
-#video{
-    width:100%;
-    display:none;
+    border-radius:16px;
+    padding:18px;
+    text-align:center;
+    font-size:22px;
+    font-weight:700;
+    color:#15803d;
 }
 
+/* ===== MEDIA ===== */
+
+#video,
 #preview{
     width:100%;
     display:none;
-    border-radius:12px;
-    margin-top:10px;
+    margin-top:14px;
+    border-radius:16px;
+    overflow:hidden;
+    border:2px solid #e2e8f0;
 }
 
-.preview{
-    width:100%;
-}
-.hasil small{
-    display:block;
-    color:#64748b;
-    font-size:12px;
+#video{
+    background:#000;
 }
 
-.hasil span{
-    display:block;
-    font-size:28px;
-    font-weight:700;
-    color:#16a34a;
+#preview{
+    object-fit:contain;
 }
 
-/* GPS */
+/* ===== CARD FOTO ===== */
 
-.btn-gps{
-    width:100%;
-    height:48px;
-    border:none;
-    border-radius:12px;
-    background:#2563eb;
-    color:#fff;
+.media-card{
+    margin-top:14px;
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid #e2e8f0;
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.05);
+}
+
+.media-title{
+    padding:10px 14px;
+    font-size:13px;
     font-weight:600;
-    margin-bottom:10px;
+    color:#475569;
+    background:#f8fafc;
 }
 
-/* AKSI */
+/* ===== BUTTON ===== */
 
 .button-group{
+    margin-top:16px;
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:8px;
+    gap:10px;
 }
 
 .button-group button{
-    height:60px;
+    height:64px;
     border:none;
-    border-radius:14px;
+    border-radius:16px;
     color:#fff;
+    cursor:pointer;
     display:flex;
     flex-direction:column;
-    align-items:center;
     justify-content:center;
-    gap:4px;
-    font-size:10px;
+    align-items:center;
+    gap:5px;
+    font-size:11px;
     font-weight:600;
+    transition:.2s;
+}
+
+.button-group button:active{
+    transform:scale(.95);
 }
 
 .button-group i{
-    font-size:18px;
+    font-size:20px;
 }
 
-/* WARNA */
+/* ===== WARNA ===== */
 
 .camera{
-    background:#475569;
+    background:#334155;
 }
 
 .capture{
@@ -170,21 +192,20 @@ label{
     background:#ef4444;
 }
 
-/* MEDIA */
+/* ===== RESPONSIVE ===== */
 
-#video,
-.preview{
-    width:100%;
-    margin-top:12px;
-    border-radius:14px;
-}
+@media (min-width:768px){
 
-#lokasi{
-    margin-top:10px;
-    padding:10px;
-    border-radius:10px;
-    background:#f8fafc;
-    font-size:12px;
-    color:#475569;
-    word-break:break-word;
+    .container{
+        padding:24px;
+    }
+
+    .button-group button{
+        height:70px;
+        font-size:12px;
+    }
+
+    .button-group i{
+        font-size:22px;
+    }
 }
