@@ -52,27 +52,19 @@ async function startCamera() {
 }
 function capturePhoto() {
 
-    const video =
-    document.getElementById("video");
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+    const preview = document.getElementById("preview");
 
     if (!video.srcObject) {
-
-        alert("Silakan buka kamera terlebih dahulu");
-
+        alert("Buka kamera terlebih dahulu");
         return;
     }
-
-    const canvas =
-    document.getElementById("canvas");
-
-    const preview =
-    document.getElementById("preview");
 
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 
-    const ctx =
-    canvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
 
     ctx.drawImage(
         video,
@@ -82,17 +74,17 @@ function capturePhoto() {
         canvas.height
     );
 
-    photoData =
-    canvas.toDataURL("image/jpeg", 0.9);
+    photoData = canvas.toDataURL("image/jpeg", 0.9);
 
     preview.src = photoData;
     preview.style.display = "block";
 
+    preview.scrollIntoView({
+        behavior: "smooth"
+    });
+
     if (stream) {
-
-        stream.getTracks()
-        .forEach(track => track.stop());
-
+        stream.getTracks().forEach(track => track.stop());
         stream = null;
     }
 
