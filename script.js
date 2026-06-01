@@ -19,36 +19,6 @@ document.querySelectorAll("#cash,#admin,#penyetor")
     el.addEventListener("input", hitungSisaTF);
 });
 
-function ambilLokasi(){
-
-    if(!navigator.geolocation){
-        alert("GPS tidak didukung browser");
-        return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-
-        function(pos){
-
-            const lat = pos.coords.latitude;
-            const lng = pos.coords.longitude;
-
-            lokasiMaps =
-            `https://maps.google.com/?q=${lat},${lng}`;
-
-            document.getElementById("lokasi").innerHTML =
-            `📍 ${lat}, ${lng}<br>
-            <a href="${lokasiMaps}" target="_blank">
-            Buka Google Maps
-            </a>`;
-        },
-
-        function(){
-            alert("Gagal mengambil lokasi");
-        }
-
-    );
-}
 
 async function startCamera(){
 
