@@ -182,19 +182,33 @@ async function shareWA() {
         minute: "2-digit"
     });
 
-    const pesan =
-`🧾 SETORAN TUNAI
+const pesan =
+`🧾 *SETORAN TUNAI*
 
-Tanggal : ${tanggal}
-Jam     : ${jam}
+\`\`\`
+          SETORAN TUNAI
+================================
 
-TOTAL CASH : Rp ${cash.toLocaleString("id-ID")}
-ADMIN      : Rp ${admin.toLocaleString("id-ID")}
-PENYETOR   : Rp ${penyetor.toLocaleString("id-ID")}
-SISA TF    : Rp ${sisa.toLocaleString("id-ID")}
+TANGGAL    : ${tanggal}
+JAM        : ${jam}
 
-PENYETOR : ${namaPenyetor}
-KONTER   : ${namaKonter}`;
+================================
+
+TOTAL CASH : Rp ${cash.toLocaleString('id-ID').padStart(15,' ')}
+ADMIN      : Rp ${admin.toLocaleString('id-ID').padStart(15,' ')}
+PENYETOR   : Rp ${penyetor.toLocaleString('id-ID').padStart(15,' ')}
+--------------------------------
+SISA TF    : Rp ${sisa.toLocaleString('id-ID').padStart(15,' ')}
+
+================================
+
+PENYETOR   : ${namaPenyetor}
+KONTER     : ${namaKonter}
+
+================================
+        TERIMA KASIH
+================================
+\`\`\``;
 
     try {
 
