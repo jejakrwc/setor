@@ -152,65 +152,61 @@ async function shareWA(){
 
     if(!photoFile){
 
-        alert(
-        "Silakan foto bukti transfer terlebih dahulu!"
-        );
-
+        alert("Silakan foto bukti transfer terlebih dahulu!");
         return;
     }
 
     let cash =
-    document.getElementById("cash").value || 0;
+        parseFloat(document.getElementById("cash").value) || 0;
 
     let admin =
-    document.getElementById("admin").value || 0;
+        parseFloat(document.getElementById("admin").value) || 0;
 
     let penyetor =
-    document.getElementById("penyetor").value || 0;
+        parseFloat(document.getElementById("penyetor").value) || 0;
 
     let namaPenyetor =
-    document.getElementById("namaPenyetor").value;
+        document.getElementById("namaPenyetor").value || "-";
 
     let namaKonter =
-    document.getElementById("namaKonter").value;
+        document.getElementById("namaKonter").value || "-";
 
     let sisa =
-    document.getElementById("sisaTF").innerText;
+        cash - (admin + penyetor);
 
-let pesan = 
+    let pesan =
 `🧾 *SETORAN TUNAI*
 
-\`\`\`
 ============================
-TOTAL CASH : Rp ${Number(cash).toLocaleString('id-ID').padStart(12, ' ')}
-ADMIN      : Rp ${Number(admin).toLocaleString('id-ID').padStart(12, ' ')}
-PENYETOR   : Rp ${Number(penyetor).toLocaleString('id-ID').padStart(12, ' ')}
+TOTAL CASH : Rp ${cash.toLocaleString('id-ID')}
+ADMIN      : Rp ${admin.toLocaleString('id-ID')}
+PENYETOR   : Rp ${penyetor.toLocaleString('id-ID')}
 ----------------------------
-SISA TF    : Rp ${sisaFormatted.padStart(12, ' ')}
+SISA TF    : Rp ${sisa.toLocaleString('id-ID')}
 ============================
 
 NAMA PENYETOR : ${namaPenyetor}
 NAMA KONTER   : ${namaKonter}
-\`\`\`
 
 📸 Bukti transfer terlampir`;
 
-    try{
+    try {
 
-        if(
+        if (
+            navigator.share &&
             navigator.canShare &&
             navigator.canShare({
-                files:[photoFile]
+                files: [photoFile]
             })
-        ){
+        ) {
 
             await navigator.share({
-                title:"Setoran Tunai",
-                text:pesan,
-                files:[photoFile]
+                title: "Setoran Tunai",
+                text: pesan,
+                files: [photoFile]
             });
 
-        }else{
+        } else {
 
             window.open(
                 "https://wa.me/?text=" +
@@ -220,12 +216,22 @@ NAMA KONTER   : ${namaKonter}
 
         }
 
-    }catch(err){
+    } catch (err) {
 
         console.error(err);
 
-        alert("Gagal membagikan data.");
+        if (err.name !== "AbortError") {
+
+            window.open(
+                "https://wa.me/?text=" +
+                encodeURIComponent(pesan),
+                "_blank"
+            );
+
+        }
+
     }
+
 }
 
 function resetForm(){
