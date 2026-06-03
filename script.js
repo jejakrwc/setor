@@ -183,7 +183,7 @@ async function shareWA() {
     });
 
 const pesan =
-`🧾 *SETORAN TUNAI*
+`
 
 \`\`\`
           SETORAN TUNAI
@@ -191,6 +191,7 @@ const pesan =
 
 TANGGAL    : ${tanggal}
 JAM        : ${jam}
+KONTER     : ${namaKonter}
 
 ================================
 
@@ -203,7 +204,6 @@ SISA TF    : Rp ${sisa.toLocaleString('id-ID').padStart(15,' ')}
 ================================
 
 PENYETOR   : ${namaPenyetor}
-KONTER     : ${namaKonter}
 
 ================================
         TERIMA KASIH
