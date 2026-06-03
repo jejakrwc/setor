@@ -178,20 +178,32 @@ let pesan =
 `🧾 *SETORAN TUNAI*
 
 \`\`\`
+          SETORAN TUNAI
 ================================
-TOTAL CASH : Rp ${cash.toLocaleString('id-ID').padStart(12,' ')}
-ADMIN      : Rp ${admin.toLocaleString('id-ID').padStart(12,' ')}
-PENYETOR   : Rp ${penyetor.toLocaleString('id-ID').padStart(12,' ')}
---------------------------------
-SISA TF    : Rp ${sisa.toLocaleString('id-ID').padStart(12,' ')}
-================================
-\`\`\`
 
-👤 *Nama Penyetor*
+Tanggal : ${tanggal}
+Jam     : ${jam}
+
+================================
+
+TOTAL CASH  Rp ${cash.toLocaleString('id-ID').padStart(15,' ')}
+ADMIN       Rp ${admin.toLocaleString('id-ID').padStart(15,' ')}
+PENYETOR    Rp ${penyetor.toLocaleString('id-ID').padStart(15,' ')}
+--------------------------------
+TOTAL TF    Rp ${sisa.toLocaleString('id-ID').padStart(15,' ')}
+
+================================
+
+PENYETOR :
 ${namaPenyetor}
 
-🏪 *Nama Konter*
+KONTER :
 ${namaKonter}
+
+================================
+      TERIMA KASIH
+================================
+\`\`\`
 
 📸 Bukti transfer terlampir`;
 
