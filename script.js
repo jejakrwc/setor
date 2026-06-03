@@ -150,12 +150,6 @@ async function capturePhoto() {
 }
 async function shareWA(){
 
-    if(!photoFile){
-
-        alert("Silakan foto bukti transfer terlebih dahulu!");
-        return;
-    }
-
     let cash =
         parseFloat(document.getElementById("cash").value) || 0;
 
@@ -174,7 +168,20 @@ async function shareWA(){
     let sisa =
         cash - (admin + penyetor);
 
-let pesan =
+    const now = new Date();
+
+    const tanggal = now.toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    });
+
+    const jam = now.toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+    let pesan =
 `🧾 *SETORAN TUNAI*
 
 \`\`\`
@@ -203,13 +210,12 @@ ${namaKonter}
 ================================
       TERIMA KASIH
 ================================
-\`\`\`
-
-📸 Bukti transfer terlampir`;
+\`\`\``;
 
     try {
 
         if (
+            photoFile &&
             navigator.share &&
             navigator.canShare &&
             navigator.canShare({
@@ -237,15 +243,11 @@ ${namaKonter}
 
         console.error(err);
 
-        if (err.name !== "AbortError") {
-
-            window.open(
-                "https://wa.me/?text=" +
-                encodeURIComponent(pesan),
-                "_blank"
-            );
-
-        }
+        window.open(
+            "https://wa.me/?text=" +
+            encodeURIComponent(pesan),
+            "_blank"
+        );
 
     }
 
