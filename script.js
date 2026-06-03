@@ -148,7 +148,12 @@ async function capturePhoto() {
     });
 
 }
-async function shareWA(){
+async function shareWA() {
+
+    if (!photoFile) {
+        alert("Silakan ambil foto bukti transfer terlebih dahulu!");
+        return;
+    }
 
     let cash =
         parseFloat(document.getElementById("cash").value) || 0;
@@ -170,87 +175,43 @@ async function shareWA(){
 
     const now = new Date();
 
-    const tanggal = now.toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-    });
+    const tanggal = now.toLocaleDateString("id-ID");
 
     const jam = now.toLocaleTimeString("id-ID", {
         hour: "2-digit",
         minute: "2-digit"
     });
 
-    let pesan =
-`🧾 *SETORAN TUNAI*
-
-\`\`\`
-          SETORAN TUNAI
-================================
+    const pesan =
+`🧾 SETORAN TUNAI
 
 Tanggal : ${tanggal}
 Jam     : ${jam}
 
-================================
+TOTAL CASH : Rp ${cash.toLocaleString("id-ID")}
+ADMIN      : Rp ${admin.toLocaleString("id-ID")}
+PENYETOR   : Rp ${penyetor.toLocaleString("id-ID")}
+SISA TF    : Rp ${sisa.toLocaleString("id-ID")}
 
-TOTAL CASH  Rp ${cash.toLocaleString('id-ID').padStart(15,' ')}
-ADMIN       Rp ${admin.toLocaleString('id-ID').padStart(15,' ')}
-PENYETOR    Rp ${penyetor.toLocaleString('id-ID').padStart(15,' ')}
---------------------------------
-TOTAL TF    Rp ${sisa.toLocaleString('id-ID').padStart(15,' ')}
-
-================================
-
-PENYETOR :
-${namaPenyetor}
-
-KONTER :
-${namaKonter}
-
-================================
-      TERIMA KASIH
-================================
-\`\`\``;
+PENYETOR : ${namaPenyetor}
+KONTER   : ${namaKonter}`;
 
     try {
 
-        if (
-            photoFile &&
-            navigator.share &&
-            navigator.canShare &&
-            navigator.canShare({
-                files: [photoFile]
-            })
-        ) {
-
-            await navigator.share({
-                title: "Setoran Tunai",
-                text: pesan,
-                files: [photoFile]
-            });
-
-        } else {
-
-            window.open(
-                "https://wa.me/?text=" +
-                encodeURIComponent(pesan),
-                "_blank"
-            );
-
-        }
+        await navigator.share({
+            title: "Setoran Tunai",
+            text: pesan,
+            files: [photoFile]
+        });
 
     } catch (err) {
 
         console.error(err);
 
-        window.open(
-            "https://wa.me/?text=" +
-            encodeURIComponent(pesan),
-            "_blank"
+        alert(
+            "Perangkat atau browser Anda tidak mendukung berbagi foto. Gunakan Chrome Android terbaru."
         );
-
     }
-
 }
 
 function resetForm(){
