@@ -174,19 +174,24 @@ async function shareWA(){
     let sisa =
         cash - (admin + penyetor);
 
-    let pesan =
+let pesan =
 `🧾 *SETORAN TUNAI*
 
-============================
-TOTAL CASH : Rp ${cash.toLocaleString('id-ID')}
-ADMIN      : Rp ${admin.toLocaleString('id-ID')}
-PENYETOR   : Rp ${penyetor.toLocaleString('id-ID')}
-----------------------------
-SISA TF    : Rp ${sisa.toLocaleString('id-ID')}
-============================
+\`\`\`
+================================
+TOTAL CASH : Rp ${cash.toLocaleString('id-ID').padStart(12,' ')}
+ADMIN      : Rp ${admin.toLocaleString('id-ID').padStart(12,' ')}
+PENYETOR   : Rp ${penyetor.toLocaleString('id-ID').padStart(12,' ')}
+--------------------------------
+SISA TF    : Rp ${sisa.toLocaleString('id-ID').padStart(12,' ')}
+================================
+\`\`\`
 
-NAMA PENYETOR : ${namaPenyetor}
-NAMA KONTER   : ${namaKonter}
+👤 *Nama Penyetor*
+${namaPenyetor}
+
+🏪 *Nama Konter*
+${namaKonter}
 
 📸 Bukti transfer terlampir`;
 
