@@ -188,3 +188,20 @@ label {
         font-size: 9px;
     }
 }
+.input-box select{
+    width:100%;
+    height:50px;
+    border:1px solid #dbe2ea;
+    border-radius:14px;
+    padding-left:42px;
+    padding-right:12px;
+    font-size:15px;
+    background:#fff;
+    color:#1e293b;
+    outline:none;
+}
+
+.input-box select:focus{
+    border-color:#22c55e;
+    box-shadow:0 0 0 4px rgba(34,197,94,.12);
+}
