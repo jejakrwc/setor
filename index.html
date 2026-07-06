@@ -1,121 +1,158 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setoran Tunai</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POS Dashboard</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="container">
+<div class="app">
 
-    <!-- APP BAR -->
-    <div class="header">
-        <div class="icon-circle">
-            <i class="fas fa-money-bill-wave"></i>
+    <!-- TOP BAR -->
+    <div class="topbar">
+        <div class="brand">
+            <i class="fas fa-cash-register"></i>
+            <div>
+                <h3>POS ADMIN</h3>
+                <span>Dashboard System</span>
+            </div>
         </div>
-        <h2>SETORAN TUNAI</h2>
-        <p class="sub">Mobile Cash Deposit System</p>
+
+        <div class="profile">
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-user-circle"></i>
+        </div>
     </div>
 
-    <!-- FORM -->
-    <div class="form-group">
-        <label>Total Uang Cash</label>
-        <div class="input-box">
+    <!-- SUMMARY CARDS -->
+    <div class="grid">
+
+        <div class="card">
             <i class="fas fa-wallet"></i>
-            <input type="number" id="cash" placeholder="Masukkan total uang cash">
+            <div>
+                <h4>Cash Today</h4>
+                <p>Rp 12.500.000</p>
+            </div>
         </div>
+
+        <div class="card">
+            <i class="fas fa-arrow-up"></i>
+            <div>
+                <h4>Income</h4>
+                <p>Rp 8.200.000</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-arrow-down"></i>
+            <div>
+                <h4>Expense</h4>
+                <p>Rp 2.100.000</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-users"></i>
+            <div>
+                <h4>Member</h4>
+                <p>1.240</p>
+            </div>
+        </div>
+
     </div>
 
-    <div class="form-group">
-        <label>Admin</label>
-        <div class="input-box">
-            <i class="fas fa-minus-circle"></i>
-            <input type="number" id="admin" value="0">
+    <!-- ACTION MENU -->
+    <div class="action-grid">
+
+        <div class="action">
+            <i class="fas fa-cash-register"></i>
+            <span>Kasir</span>
         </div>
+
+        <div class="action">
+            <i class="fas fa-file-invoice"></i>
+            <span>Transaksi</span>
+        </div>
+
+        <div class="action">
+            <i class="fas fa-chart-line"></i>
+            <span>Report</span>
+        </div>
+
+        <div class="action">
+            <i class="fas fa-users"></i>
+            <span>User</span>
+        </div>
+
     </div>
 
-    <div class="form-group">
-        <label>Penyetor</label>
-        <div class="input-box">
-            <i class="fas fa-user-minus"></i>
-            <input type="number" id="penyetor" value="0">
-        </div>
+    <!-- TRANSACTION LIST -->
+    <div class="section-title">
+        <h3>Recent Transaction</h3>
     </div>
 
-    <!-- RESULT CARD -->
-    <div class="form-group">
-        <label>Sisa TF</label>
-        <div class="hasil" id="sisaTF">
-            Rp 0
-        </div>
-    </div>
+    <div class="list">
 
-    <div class="form-group">
-        <label>Nama Penyetor</label>
-        <div class="input-box">
-            <i class="fas fa-user"></i>
-            <select id="namaPenyetor">
-                <option value="">Pilih Penyetor</option>
-                <option value="Rizki Wahyu Chandra">Rizki Wahyu Chandra</option>
-                <option value="Leo Adrian">Leo Adrian</option>
-            </select>
+        <div class="item">
+            <i class="fas fa-shopping-cart"></i>
+            <div>
+                <h4>Setoran Tunai</h4>
+                <span>Rizki • 2 min ago</span>
+            </div>
+            <b>+Rp 1.200.000</b>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Nama Konter</label>
-        <div class="input-box">
+        <div class="item">
             <i class="fas fa-store"></i>
-            <input type="text" id="namaKonter" placeholder="Nama konter">
-        </div>
-    </div>
-
-    <!-- MEDIA PREVIEW -->
-    <div class="media-card">
-
-        <div class="media-title">
-            <i class="fas fa-camera"></i>
-            Bukti Transfer
+            <div>
+                <h4>Konter A</h4>
+                <span>Leo • 10 min ago</span>
+            </div>
+            <b>+Rp 800.000</b>
         </div>
 
-        <video id="video" autoplay playsinline muted></video>
-        <canvas id="canvas" style="display:none;"></canvas>
-        <img id="preview" class="preview" alt="Preview Foto">
+        <div class="item">
+            <i class="fas fa-receipt"></i>
+            <div>
+                <h4>Admin Fee</h4>
+                <span>System • 1 hour ago</span>
+            </div>
+            <b>-Rp 50.000</b>
+        </div>
+
     </div>
 
-    <!-- ACTION BUTTONS -->
-    <div class="button-group">
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
 
-        <button type="button" class="camera" onclick="startCamera()">
-            <i class="fas fa-camera"></i>
-            Kamera
-        </button>
+        <div class="nav active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
 
-        <button type="button" class="capture" onclick="capturePhoto()">
-            <i class="fas fa-image"></i>
-            Foto
-        </button>
+        <div class="nav">
+            <i class="fas fa-plus-circle"></i>
+            <span>Add</span>
+        </div>
 
-        <button type="button" class="wa" onclick="shareWA()">
-            <i class="fab fa-whatsapp"></i>
-            Share
-        </button>
+        <div class="nav">
+            <i class="fas fa-chart-pie"></i>
+            <span>Stats</span>
+        </div>
 
-        <button type="button" class="reset" onclick="resetForm()">
-            <i class="fas fa-rotate-left"></i>
-            Reset
-        </button>
+        <div class="nav">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </div>
 
     </div>
 
 </div>
-
-<script src="script.js"></script>
 
 </body>
 </html>
