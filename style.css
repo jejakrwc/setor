@@ -6,217 +6,192 @@
 }
 
 body {
-    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
     font-family: 'Poppins', sans-serif;
+    background: #f4f6fb;
+    color: #111827;
     padding: 14px;
-    color: #0f172a;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
-/* ===== CONTAINER (NOC CLEAN GLASS FEEL) ===== */
+/* ===== APP CONTAINER (ANDROID STYLE) ===== */
 .container {
-    max-width: 520px;
+    max-width: 420px;
     margin: auto;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(14px);
-    border-radius: 26px;
-    padding: 26px;
-    box-shadow: 0 20px 50px rgba(15, 23, 42, .10);
-    border: 1px solid rgba(226,232,240,0.8);
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    border: 1px solid #eef2f7;
 }
 
-/* ===== HEADER ===== */
+/* ===== HEADER (APP BAR STYLE) ===== */
 .header {
     text-align: center;
-    margin-bottom: 26px;
+    padding: 12px 0 18px;
 }
 
 .header i {
-    font-size: 42px;
-    color: #22c55e;
-    margin-bottom: 10px;
-    filter: drop-shadow(0 6px 10px rgba(34,197,94,.25));
+    font-size: 40px;
+    color: #3b82f6;
+    margin-bottom: 6px;
 }
 
 .header h2 {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 700;
-    letter-spacing: .3px;
-    color: #0f172a;
+    color: #111827;
 }
 
-/* ===== FORM ===== */
+/* ===== CARD FORM STYLE ===== */
 .form-group {
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
+    margin-bottom: 14px;
 }
 
+/* label kecil seperti material */
 label {
-    font-size: 13px;
+    display: block;
+    font-size: 12px;
     font-weight: 600;
-    color: #475569;
-    flex: 0 0 35%;
+    color: #6b7280;
+    margin-bottom: 6px;
 }
 
-/* ===== INPUT STYLE (SMOOTH FLOAT EFFECT) ===== */
+/* ===== INPUT MATERIAL STYLE ===== */
 .input-box {
     position: relative;
-    flex: 1;
 }
 
 .input-box i {
     position: absolute;
-    left: 14px;
+    left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: #94a3b8;
     font-size: 14px;
-    transition: .2s;
+    color: #9ca3af;
 }
 
 .input-box input,
 .input-box select {
     width: 100%;
-    height: 52px;
-    border: 1px solid #e2e8f0;
-    border-radius: 14px;
-    padding-left: 42px;
-    padding-right: 12px;
+    height: 48px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    padding-left: 38px;
     font-size: 14px;
-    background: #fff;
     outline: none;
-    transition: all .25s ease;
-    box-shadow: 0 1px 2px rgba(0,0,0,.03);
+    transition: .2s ease;
 }
 
-/* hover + focus smooth */
+/* Android focus effect */
 .input-box input:focus,
 .input-box select:focus {
-    border-color: #22c55e;
-    box-shadow: 0 0 0 4px rgba(34,197,94,.12);
-    transform: translateY(-1px);
+    border-color: #3b82f6;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(59,130,246,.15);
 }
 
-.input-box input:focus + i {
-    color: #22c55e;
-}
-
-/* ===== HASIL ===== */
+/* ===== HASIL CARD ===== */
 .hasil {
-    flex: 1;
-    background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
-    border: 1px solid #bbf7d0;
-    border-radius: 14px;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
     padding: 14px;
-    text-align: right;
+    border-radius: 14px;
     font-size: 18px;
     font-weight: 700;
-    color: #16a34a;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,.04);
+    color: #1d4ed8;
+    text-align: right;
 }
 
-/* ===== MEDIA ===== */
-#video, #preview {
-    width: 100%;
-    display: none;
-    margin-top: 14px;
-    border-radius: 16px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 10px 25px rgba(0,0,0,.06);
-}
-
+/* ===== MEDIA CARD ===== */
 .media-card {
-    margin-top: 14px;
-    background: #fff;
-    border-radius: 18px;
-    border: 1px solid #e2e8f0;
+    margin-top: 12px;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
     overflow: hidden;
 }
 
 .media-title {
-    padding: 10px 14px;
+    padding: 10px 12px;
     font-size: 12px;
     font-weight: 600;
-    color: #64748b;
-    background: #f8fafc;
+    background: #f3f4f6;
+    color: #6b7280;
 }
 
-/* ===== BUTTON ===== */
+#video, #preview {
+    width: 100%;
+    display: none;
+}
+
+/* ===== BUTTON GRID (ANDROID ACTION BUTTONS) ===== */
 .button-group {
-    margin-top: 22px;
+    margin-top: 18px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 
+/* MATERIAL BUTTON */
 .button-group button {
-    height: 62px;
+    height: 64px;
     border: none;
     border-radius: 16px;
     color: #fff;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
     font-size: 10px;
     font-weight: 600;
-    transition: all .2s ease;
-    box-shadow: 0 8px 18px rgba(0,0,0,.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: .15s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-/* hover smooth */
-.button-group button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 22px rgba(0,0,0,.12);
-}
-
+/* ripple feel */
 .button-group button:active {
     transform: scale(.96);
 }
 
+/* icon */
 .button-group i {
     font-size: 18px;
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,.2));
 }
 
-/* ===== COLOR PALETTE (NOC MODERN) ===== */
-.camera { background: #1f2937; }
-.capture { background: linear-gradient(135deg, #22c55e, #16a34a); }
-.wa { background: linear-gradient(135deg, #25D366, #128C7E); }
-.reset { background: linear-gradient(135deg, #ef4444, #dc2626); }
+/* ===== MATERIAL COLORS ===== */
+.camera {
+    background: #1f2937;
+}
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 500px) {
+.capture {
+    background: #3b82f6;
+}
+
+.wa {
+    background: #22c55e;
+}
+
+.reset {
+    background: #ef4444;
+}
+
+/* ===== MOBILE OPTIMIZED ===== */
+@media (max-width: 480px) {
     .container {
-        padding: 18px;
-    }
-
-    .form-group {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-    }
-
-    label {
-        width: 100%;
-    }
-
-    .input-box, .hasil {
-        width: 100%;
-    }
-
-    .button-group {
-        gap: 6px;
+        padding: 14px;
+        border-radius: 18px;
     }
 
     .button-group button {
-        height: 56px;
+        height: 58px;
         font-size: 9px;
+    }
+
+    .header h2 {
+        font-size: 16px;
     }
 }
