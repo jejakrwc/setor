@@ -10,7 +10,8 @@
 </head>
 
 <body>
-<div id="pageSetoran" class="container">
+<div id="pageSetoran"></div>
+<div class="container">
 
     <!-- HEADER -->
     <div class="header">
@@ -174,204 +175,15 @@
 
         </button>
 
-<button id="nextBtn" class="nav-btn">
+        <button id="nextBtn" class="nav-btn">
 
-    Berikutnya
+            Berikutnya
 
-    <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-arrow-right"></i>
 
-</button>
-
-
-<button 
-id="saveBtn"
-class="nav-btn"
-onclick="saveSetoran()"
-style="display:none;">
-
-
-<i class="fa-solid fa-floppy-disk"></i>
-
-Simpan
-
-
-</button>
-
-    </div>
-
-</div>
-
-<!-- ==========================
-     HALAMAN RIWAYAT
-=========================== -->
-
-<div id="pageRiwayat" class="container riwayat-page" style="display:none;">
-
-
-    <!-- HEADER -->
-
-    <div class="header">
-
-        <div class="icon-circle">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-        </div>
-
-        <h2>GAMEZONE PADANG</h2>
-
-        <p class="sub">
-            RIWAYAT SETORAN
-        </p>
-
-    </div>
-
-
-
-    <!-- LIST RIWAYAT -->
-
- <div id="historyList">
-
-</div>
-
-
-
-    <!-- PAGINATION -->
-
-    <div class="pagination">
-
-
-        <button>
-            <i class="fa-solid fa-chevron-left"></i>
-        </button>
-
-
-        <button class="active">
-            1
-        </button>
-
-
-        <button>
-            2
-        </button>
-
-
-        <button>
-            3
-        </button>
-
-
-        <button>
-            <i class="fa-solid fa-chevron-right"></i>
-        </button>
-
-
-    </div>
-
-
-<!-- HALAMAN RIWAYAT -->
-<div id="pageRiwayat" class="container riwayat-page" style="display:none;">
-
-
-    <div class="header">
-
-        <div class="icon-circle">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-        </div>
-
-        <h2>GAMEZONE PADANG</h2>
-
-        <p class="sub">
-            RIWAYAT SETORAN
-        </p>
-
-    </div>
-
-
-    <div id="historyList"></div>
-
-
-    <div class="pagination">
-
-        <button>
-            <i class="fa-solid fa-chevron-left"></i>
-        </button>
-
-
-        <button class="active">
-            1
-        </button>
-
-
-        <button>
-            2
-        </button>
-
-
-        <button>
-            3
-        </button>
-
-
-        <button>
-            <i class="fa-solid fa-chevron-right"></i>
         </button>
 
     </div>
-
-
-    <button 
-    class="nav-btn"
-    onclick="backSetoran()">
-
-        <i class="fa-solid fa-arrow-left"></i>
-
-        Kembali Setoran
-
-    </button>
-
-
-</div>
-
-
-
-<!-- DETAIL RIWAYAT -->
-<div id="detailRiwayat" class="container" style="display:none;">
-
-
-    <div class="header">
-
-        <div class="icon-circle">
-            <i class="fa-solid fa-file-invoice"></i>
-        </div>
-
-
-        <h2>
-        GAMEZONE PADANG
-        </h2>
-
-
-        <p class="sub">
-        DETAIL SETORAN
-        </p>
-
-    </div>
-
-
-    <div id="isiDetail"></div>
-
-
-    <button 
-    class="nav-btn"
-    onclick="backHistory()">
-
-        <i class="fa-solid fa-arrow-left"></i>
-
-        Kembali
-
-    </button>
-
-
-</div>
-
 
 </div>
 <!-- Floating Action Button -->
@@ -400,10 +212,9 @@ Simpan
             <i class="fa-solid fa-arrow-rotate-left"></i>
         </button>
 
-        <button class="fab history" onclick="openHistory()" title="Riwayat">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-        </button>
     </div>
+
+</div>
 
 </div>
 <script src="script.js"></script>
