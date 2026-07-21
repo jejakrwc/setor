@@ -10,115 +10,402 @@
 </head>
 
 <body>
-
-<div class="container">
+<div id="pageSetoran" class="container">
 
     <!-- HEADER -->
     <div class="header">
         <div class="icon-circle">
             <i class="fas fa-money-bill-wave"></i>
         </div>
-        <h2>SETORAN TUNAI</h2>
-        <p class="sub">POS Mobile System</p>
+
+        <h2>GAMEZONE PADANG</h2>
+        <p class="sub">SETORAN TUNAI</p>
     </div>
 
-    <!-- INPUT CASH -->
-    <div class="form-group">
-        <label>Total Uang Cash</label>
-        <div class="input-box">
-            <i class="fas fa-wallet"></i>
-            <input type="number" id="cash" placeholder="Masukkan total cash">
-        </div>
-    </div>
+    <!-- STEP -->
+    <div class="stepper">
 
-    <!-- ADMIN -->
-    <div class="form-group">
-        <label>Admin</label>
-        <div class="input-box">
-            <i class="fas fa-minus-circle"></i>
-            <input type="number" id="admin" value="0">
-        </div>
-    </div>
-
-    <!-- PENYETOR -->
-    <div class="form-group">
-        <label>Penyetor</label>
-        <div class="input-box">
-            <i class="fas fa-user-minus"></i>
-            <input type="number" id="penyetor" value="0">
-        </div>
-    </div>
-
-    <!-- HASIL -->
-    <div class="form-group">
-        <label>Sisa TF</label>
-        <div class="hasil" id="sisaTF">Rp 0</div>
-    </div>
-
-    <!-- NAMA PENYETOR -->
-    <div class="form-group">
-        <label>Nama Penyetor</label>
-        <div class="input-box">
-            <i class="fas fa-user"></i>
-            <select id="namaPenyetor">
-                <option value="">Pilih Penyetor</option>
-                <option value="Rizki Wahyu Chandra">Rizki Wahyu Chandra</option>
-                <option value="Leo Adrian">Leo Adrian</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- NAMA KONTER -->
-    <div class="form-group">
-        <label>Nama Konter</label>
-        <div class="input-box">
-            <i class="fas fa-store"></i>
-            <input type="text" id="namaKonter" placeholder="Nama konter">
-        </div>
-    </div>
-
-    <!-- MEDIA CAMERA -->
-    <div class="media-card">
-
-        <div class="media-title">
-            <i class="fas fa-camera"></i>
-            Bukti Transfer
+        <div class="step active">
+            <span>1</span>
+            <small>Data</small>
         </div>
 
-        <video id="video" autoplay playsinline muted></video>
+        <div class="step-line"></div>
 
-        <canvas id="canvas" style="display:none;"></canvas>
+        <div class="step">
+            <span>2</span>
+            <small>Nominal</small>
+        </div>
 
-        <img id="preview" alt="Preview Foto" style="display:none;">
+        <div class="step-line"></div>
+
+        <div class="step">
+            <span>3</span>
+            <small>Bukti</small>
+        </div>
+
     </div>
 
-    <!-- BUTTON ACTION -->
-    <div class="button-group">
+    <!-- SLIDER -->
+    <div class="slider">
 
-        <button class="camera" type="button" onclick="startCamera()">
-            <i class="fas fa-camera"></i>
-            Kamera
+        <!-- =====================
+             SLIDE 1
+        ====================== -->
+
+        <div class="slide active">
+
+            <div class="form-group">
+                <label>
+                    <i class="fas fa-user"></i>
+                    Nama Penyetor
+                </label>
+
+                <div class="input-box">
+                    <i class="fas fa-user"></i>
+
+                    <select id="namaPenyetor">
+                        <option value="">Pilih Penyetor</option>
+                        <option>Rizki Wahyu Chandra</option>
+                        <option>Leo Adrian</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    <i class="fas fa-store"></i>
+                    Nama Konter
+                </label>
+
+                <div class="input-box">
+                    <i class="fas fa-store"></i>
+                    <input type="text" id="namaKonter" placeholder="Nama Konter">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =====================
+             SLIDE 2
+        ====================== -->
+
+        <div class="slide">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label><i class="fas fa-wallet"></i>Total Cash</label>
+
+                    <div class="input-box">
+                        <i class="fas fa-wallet"></i>
+                        <input type="number" id="cash">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-minus-circle"></i>Admin</label>
+
+                    <div class="input-box">
+                        <i class="fas fa-minus-circle"></i>
+                        <input type="number" id="admin" value="0">
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+
+                    <label><i class="fas fa-user-minus"></i>Penyetor</label>
+
+                    <div class="input-box">
+                        <i class="fas fa-user-minus"></i>
+                        <input type="number" id="penyetor" value="0">
+                    </div>
+
+                </div>
+
+                <div class="hasil full-width">
+                    <span class="hasil-title">SISA TF</span>
+                    <span id="sisaTF">Rp 0</span>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+        <!-- =====================
+             SLIDE 3
+        ====================== -->
+
+        <div class="slide">
+
+            <div class="media-card">
+
+                <div class="media-title">
+                    <i class="fas fa-camera"></i>
+                    Bukti Transfer
+                </div>
+
+                <video id="video" autoplay playsinline muted></video>
+
+                <canvas id="canvas" style="display:none;"></canvas>
+
+                <img id="preview" style="display:none;">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- NAVIGASI -->
+
+    <div class="slider-nav">
+
+        <button id="prevBtn" class="nav-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Sebelumnya
+
         </button>
 
-        <button class="capture" type="button" onclick="capturePhoto()">
-            <i class="fas fa-image"></i>
-            Gambar
-        </button>
+<button id="nextBtn" class="nav-btn">
 
-        <button class="wa" type="button" onclick="shareWA()">
-            <i class="fab fa-whatsapp"></i>
-            Share
-        </button>
+    Berikutnya
 
-        <button class="reset" type="button" onclick="resetForm()">
-            <i class="fas fa-rotate-left"></i>
-            Reset
-        </button>
+    <i class="fa-solid fa-arrow-right"></i>
+
+</button>
+
+
+<button 
+id="saveBtn"
+class="nav-btn"
+onclick="saveSetoran()"
+style="display:none;">
+
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Simpan
+
+
+</button>
 
     </div>
 
 </div>
 
+<!-- ==========================
+     HALAMAN RIWAYAT
+=========================== -->
+
+<div id="pageRiwayat" class="container riwayat-page" style="display:none;">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="icon-circle">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+
+        <h2>GAMEZONE PADANG</h2>
+
+        <p class="sub">
+            RIWAYAT SETORAN
+        </p>
+
+    </div>
+
+
+
+    <!-- LIST RIWAYAT -->
+
+ <div id="historyList">
+
+</div>
+
+
+
+    <!-- PAGINATION -->
+
+    <div class="pagination">
+
+
+        <button>
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+
+        <button class="active">
+            1
+        </button>
+
+
+        <button>
+            2
+        </button>
+
+
+        <button>
+            3
+        </button>
+
+
+        <button>
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+
+    </div>
+
+
+<!-- HALAMAN RIWAYAT -->
+<div id="pageRiwayat" class="container riwayat-page" style="display:none;">
+
+
+    <div class="header">
+
+        <div class="icon-circle">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+
+        <h2>GAMEZONE PADANG</h2>
+
+        <p class="sub">
+            RIWAYAT SETORAN
+        </p>
+
+    </div>
+
+
+    <div id="historyList"></div>
+
+
+    <div class="pagination">
+
+        <button>
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+
+        <button class="active">
+            1
+        </button>
+
+
+        <button>
+            2
+        </button>
+
+
+        <button>
+            3
+        </button>
+
+
+        <button>
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+    </div>
+
+
+    <button 
+    class="nav-btn"
+    onclick="backSetoran()">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Kembali Setoran
+
+    </button>
+
+
+</div>
+
+
+
+<!-- DETAIL RIWAYAT -->
+<div id="detailRiwayat" class="container" style="display:none;">
+
+
+    <div class="header">
+
+        <div class="icon-circle">
+            <i class="fa-solid fa-file-invoice"></i>
+        </div>
+
+
+        <h2>
+        GAMEZONE PADANG
+        </h2>
+
+
+        <p class="sub">
+        DETAIL SETORAN
+        </p>
+
+    </div>
+
+
+    <div id="isiDetail"></div>
+
+
+    <button 
+    class="nav-btn"
+    onclick="backHistory()">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Kembali
+
+    </button>
+
+
+</div>
+
+
+</div>
+<!-- Floating Action Button -->
+
+<div class="fab-container">
+
+    <button class="fab-menu" id="fabMenu">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+
+    <div class="fab-items" id="fabItems">
+
+        <button class="fab camera" onclick="startCamera()" title="Buka Kamera">
+            <i class="fa-solid fa-video"></i>
+        </button>
+
+        <button class="fab capture" onclick="capturePhoto()" title="Ambil Foto">
+            <i class="fa-solid fa-camera"></i>
+        </button>
+
+        <button class="fab wa" onclick="shareWA()" title="Kirim WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </button>
+
+        <button class="fab reset" onclick="resetForm()" title="Reset">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+        </button>
+
+        <button class="fab history" onclick="openHistory()" title="Riwayat">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+        </button>
+    </div>
+
+</div>
 <script src="script.js"></script>
 
 </body>
