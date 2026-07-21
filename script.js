@@ -146,7 +146,8 @@ async function capturePhoto() {
     preview.scrollIntoView({
         behavior:"smooth"
     });
-
+document.getElementById("saveBtn")
+.style.display="flex";
 }
 async function shareWA() {
 
@@ -255,4 +256,483 @@ function resetForm(){
 
     photoData = "";
 photoFile = null;
+}
+
+function updateProgress(){
+
+    let total = 6;
+    let done = 0;
+
+    if(cash.value) done++;
+    if(admin.value) done++;
+    if(penyetor.value) done++;
+    if(namaPenyetor.value) done++;
+    if(namaKonter.value.trim()) done++;
+    if(preview.src && preview.style.display !== "none") done++;
+
+    let percent = Math.round(done / total * 100);
+
+    progressFill.style.width = percent + "%";
+    progressText.textContent = percent + "%";
+    progressInfo.textContent = `${done} / ${total} Data Lengkap`;
+
+}
+document.querySelectorAll("input, select").forEach(el=>{
+    el.addEventListener("input", updateProgress);
+    el.addEventListener("change", updateProgress);
+});
+
+const fabMenu = document.getElementById("fabMenu");
+const fabItems = document.getElementById("fabItems");
+
+fabMenu.addEventListener("click", () => {
+
+    fabMenu.classList.toggle("active");
+    fabItems.classList.toggle("show");
+
+});
+
+const slides = document.querySelectorAll(".slide");
+const steps = document.querySelectorAll(".step");
+
+let current = 0;
+
+function showSlide(index){
+
+    slides.forEach(slide=>slide.classList.remove("active"));
+    steps.forEach(step=>step.classList.remove("active"));
+
+    slides[index].classList.add("active");
+
+    for(let i=0;i<=index;i++){
+        steps[i].classList.add("active");
+    }
+
+    prevBtn.style.visibility=index===0?"hidden":"visible";
+    nextBtn.innerHTML=index===slides.length-1?
+    'Selesai <i class="fa-solid fa-check"></i>':
+    'Berikutnya <i class="fa-solid fa-arrow-right"></i>';
+
+}
+
+nextBtn.onclick=()=>{
+
+
+    if(current < slides.length-1){
+
+
+        current++;
+
+        showSlide(current);
+
+
+    }else{
+
+
+
+
+    }
+
+
+}
+
+prevBtn.onclick=()=>{
+
+    if(current>0){
+
+        current--;
+
+        showSlide(current);
+
+    }
+
+}
+
+showSlide(0);
+
+function validSlide(index){
+
+    switch(index){
+
+        // Slide 1
+        case 0:
+
+            return (
+                document.getElementById("namaPenyetor").value.trim() !== "" &&
+                document.getElementById("namaKonter").value.trim() !== ""
+            );
+
+        // Slide 2
+        case 1:
+
+            return (
+                document.getElementById("cash").value !== "" &&
+                Number(document.getElementById("cash").value) > 0
+            );
+
+        // Slide 3
+        case 2:
+
+            return (
+                document.getElementById("preview").style.display !== "none"
+            );
+
+    }
+
+    return true;
+
+}
+
+function openHistory(){
+
+    document.getElementById("pageSetoran")
+    .style.display="none";
+
+
+    document.getElementById("pageRiwayat")
+    .style.display="block";
+
+
+    loadHistory();
+
+}
+function loadHistory(){
+
+
+let box =
+document.getElementById("historyList");
+
+
+box.innerHTML="";
+
+
+let data =
+JSON.parse(
+localStorage.getItem("riwayatSetoran")
+) || [];
+
+
+
+if(data.length===0){
+
+box.innerHTML=`
+
+<div class="history-card">
+
+Belum ada riwayat setoran
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+
+data.slice(0,20)
+.forEach(item=>{
+
+
+box.innerHTML += `
+
+
+<div class="history-card">
+
+
+<div>
+
+
+<b>
+${item.nama}
+</b>
+
+
+<br>
+
+
+${item.hari},
+${item.tanggal}
+
+
+<br>
+
+
+<i class="fa-solid fa-clock"></i>
+
+${item.jam}
+
+
+<br>
+
+
+Rp ${item.cash.toLocaleString("id-ID")}
+
+
+</div>
+
+
+
+<button 
+class="detail-btn"
+onclick="detailHistory(${item.id})">
+
+
+<i class="fa-solid fa-eye"></i>
+
+Lihat
+
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+});
+
+
+}
+function detailHistory(id){
+
+
+let data =
+JSON.parse(
+localStorage.getItem("riwayatSetoran")
+);
+
+
+
+let item =
+data.find(x=>x.id===id);
+
+
+
+document.getElementById("pageRiwayat")
+.style.display="none";
+
+
+document.getElementById("detailRiwayat")
+.style.display="block";
+
+
+
+document.getElementById("isiDetail")
+.innerHTML=`
+
+<div class="history-card struk">
+
+
+<h3>
+GAMEZONE PADANG
+</h3>
+
+<center>
+SETORAN TUNAI
+</center>
+
+
+<hr>
+
+
+Nama :
+${item.nama}
+
+
+<br>
+
+Konter :
+${item.konter}
+
+
+<br>
+
+Tanggal :
+${item.hari},
+${item.tanggal}
+
+
+<br>
+
+Jam :
+${item.jam}
+
+
+<hr>
+
+
+TOTAL CASH
+
+<br>
+
+<b>
+Rp ${item.cash.toLocaleString("id-ID")}
+</b>
+
+
+<br><br>
+
+
+ADMIN
+
+<br>
+
+Rp ${item.admin.toLocaleString("id-ID")}
+
+
+
+<br><br>
+
+
+PENYETOR
+
+<br>
+
+Rp ${item.penyetor.toLocaleString("id-ID")}
+
+
+
+<hr>
+
+
+<b>
+
+${item.sisa}
+
+</b>
+
+
+
+<br><br>
+
+
+<img src="${item.foto}"
+
+style="
+width:100%;
+border-radius:15px;
+">
+
+
+</div>
+
+`;
+
+}
+
+function backHistory(){
+
+    document.getElementById("detailRiwayat")
+    .style.display="none";
+
+
+    document.getElementById("pageRiwayat")
+    .style.display="block";
+
+
+}
+function backSetoran(){
+
+    document.getElementById("pageRiwayat")
+    .style.display="none";
+
+
+    document.getElementById("pageSetoran")
+    .style.display="block";
+
+
+}
+
+// ===============================
+// SIMPAN RIWAYAT LOCAL STORAGE
+// ===============================
+
+function saveSetoran(){
+
+
+    if(!photoData){
+
+        alert("Ambil foto bukti terlebih dahulu");
+
+        return;
+
+    }
+
+
+    let data = {
+
+        id: Date.now(),
+
+        nama:
+        document.getElementById("namaPenyetor").value,
+
+
+        konter:
+        document.getElementById("namaKonter").value,
+
+
+        cash:
+        Number(document.getElementById("cash").value),
+
+
+        admin:
+        Number(document.getElementById("admin").value),
+
+
+        penyetor:
+        Number(document.getElementById("penyetor").value),
+
+
+        sisa:
+        document.getElementById("sisaTF").innerText,
+
+
+        tanggal:
+        new Date().toLocaleDateString("id-ID"),
+
+
+        hari:
+        new Date().toLocaleDateString("id-ID",{
+            weekday:"long"
+        }),
+
+
+        jam:
+        new Date().toLocaleTimeString("id-ID"),
+
+
+        foto:
+        photoData
+
+    };
+
+
+
+    let riwayat =
+    JSON.parse(
+        localStorage.getItem("riwayatSetoran")
+    ) || [];
+
+
+
+    riwayat.unshift(data);
+
+
+
+    localStorage.setItem(
+        "riwayatSetoran",
+        JSON.stringify(riwayat)
+    );
+
+
+document.getElementById("saveBtn")
+.style.display="none";
+    alert("Riwayat setoran tersimpan");
+
+
 }
