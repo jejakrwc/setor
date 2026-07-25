@@ -146,7 +146,7 @@ async function capturePhoto() {
     preview.scrollIntoView({
         behavior:"smooth"
     });
-
+nextBtn.disabled = !validSlide(current);
 }
 async function shareWA() {
 
@@ -281,8 +281,17 @@ function updateProgress(){
 
 }
 document.querySelectorAll("input, select").forEach(el=>{
-    el.addEventListener("input", updateProgress);
-    el.addEventListener("change", updateProgress);
+
+    el.addEventListener("input", ()=>{
+        updateProgress();
+        nextBtn.disabled = !validSlide(current);
+    });
+
+    el.addEventListener("change", ()=>{
+        updateProgress();
+        nextBtn.disabled = !validSlide(current);
+    });
+
 });
 
 const fabMenu = document.getElementById("fabMenu");
@@ -302,33 +311,41 @@ let current = 0;
 
 function showSlide(index){
 
-    slides.forEach(slide=>slide.classList.remove("active"));
-    steps.forEach(step=>step.classList.remove("active"));
+    slides.forEach(slide => slide.classList.remove("active"));
+    steps.forEach(step => step.classList.remove("active"));
 
     slides[index].classList.add("active");
 
-    for(let i=0;i<=index;i++){
+    for(let i = 0; i <= index; i++){
         steps[i].classList.add("active");
     }
 
-    prevBtn.style.visibility=index===0?"hidden":"visible";
-    nextBtn.innerHTML=index===slides.length-1?
-    'Selesai <i class="fa-solid fa-check"></i>':
-    'Berikutnya <i class="fa-solid fa-arrow-right"></i>';
+    prevBtn.style.visibility = index === 0 ? "hidden" : "visible";
+
+    nextBtn.innerHTML = index === slides.length - 1
+        ? 'Selesai <i class="fa-solid fa-check"></i>'
+        : 'Berikutnya <i class="fa-solid fa-arrow-right"></i>';
+
+    nextBtn.disabled = !validSlide(index);
 
 }
 
-nextBtn.onclick=()=>{
+nextBtn.onclick = () => {
 
-    if(current<slides.length-1){
-
-        current++;
-
-        showSlide(current);
-
+    if (!validSlide(current)) {
+        alert("Lengkapi semua data terlebih dahulu!");
+        return;
     }
 
-}
+    if (current < slides.length - 1) {
+        current++;
+        showSlide(current);
+    } else {
+        // Slide terakhir
+        alert("Semua data sudah lengkap.");
+    }
+
+};
 
 prevBtn.onclick=()=>{
 
@@ -350,7 +367,6 @@ function validSlide(index){
 
         // Slide 1
         case 0:
-
             return (
                 document.getElementById("namaPenyetor").value.trim() !== "" &&
                 document.getElementById("namaKonter").value.trim() !== ""
@@ -358,22 +374,22 @@ function validSlide(index){
 
         // Slide 2
         case 1:
-
             return (
-                document.getElementById("cash").value !== "" &&
-                Number(document.getElementById("cash").value) > 0
+                document.getElementById("cash").value.trim() !== "" &&
+                document.getElementById("admin").value.trim() !== "" &&
+                document.getElementById("penyetor").value.trim() !== ""
             );
 
         // Slide 3
         case 2:
-
             return (
-                document.getElementById("preview").style.display !== "none"
+                document.getElementById("preview").style.display !== "none" &&
+                photoFile !== null
             );
 
+        default:
+            return true;
     }
-
-    return true;
 
 }
 
