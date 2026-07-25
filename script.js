@@ -211,12 +211,16 @@ PENYETOR   : ${namaPenyetor}
 \`\`\``;
 
     try {
+if (!navigator.canShare || !navigator.canShare({ files: [photoFile] })) {
+    alert("Browser tidak mendukung berbagi file.");
+    return;
+}
 
-        await navigator.share({
-            title: "Setoran Tunai",
-            text: pesan,
-            files: [photoFile]
-        });
+await navigator.share({
+    title: "Setoran Tunai",
+    text: pesan,
+    files: [photoFile]
+});
 
     } catch (err) {
 
